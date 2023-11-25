@@ -1,33 +1,9 @@
-import { useEffect, useState } from "react";
 import { url } from "../../constants/api";
 import PostItem from "./PostItem";
+import useApi from "../../hooks/useApi";
 
 function PostList() {
-	const [posts, setPosts] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [isError, setIsError] = useState(false);
-
-	useEffect(() => {
-		async function getData() {
-			try {
-				setIsError(false);
-				setIsLoading(true);
-				const response = await fetch(url);
-
-				if (response.ok) {
-					const json = await response.json();
-					return setPosts(json);
-				}
-
-				throw new Error();
-			} catch (error) {
-				setIsError(true);
-			} finally {
-				setIsLoading(false);
-			}
-		}
-		getData();
-	}, []);
+	const { data: posts, isLoading, isError } = useApi(url);
 
 	if (isLoading) {
 		return <div>Loading posts...</div>;
