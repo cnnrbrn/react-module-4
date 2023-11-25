@@ -3,7 +3,7 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import ProductPage from "./pages/ProductPage";
+import PostPage from "./pages/PostPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Layout from "./components/layout/Layout";
 
@@ -13,7 +13,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<HomePage />} />
-					<Route path="product/:id/:name" element={<ProductPage />} />
+					<Route path="post/:id" element={<PostPage />} />
 					<Route path="*" element={<NotFoundPage />} />
 				</Route>
 			</Routes>
