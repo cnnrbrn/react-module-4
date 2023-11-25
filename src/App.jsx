@@ -1,57 +1,24 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import "./App.css";
-
-function Example() {
-	// useEffect that starts a timer which runs every second
-	useEffect(() => {
-		const timerId = setInterval(() => {
-			console.log("Timer running");
-		}, 1000);
-
-		// This is the cleanup function
-		return () => {
-			clearInterval(timerId);
-		};
-	}, []);
-
-	return <div>Example is showing</div>;
-}
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import Layout from "./components/layout/Layout";
 
 function App() {
-	const [showComponent, setShowComponent] = useState(true);
-
-	function onButtonClick() {
-		setShowComponent(false);
-	}
-
 	return (
 		<div>
-			{showComponent ? <Example /> : null}
-			<button onClick={onButtonClick}>Hide component</button>
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					<Route index element={<HomePage />} />
+					<Route path="product/:id/:name" element={<ProductPage />} />
+					<Route path="*" element={<NotFoundPage />} />
+				</Route>
+			</Routes>
 		</div>
 	);
 }
 
 export default App;
-
-// function App() {
-// 	const [count, setCount] = useState(0);
-// 	const [secondCount, setSecondCount] = useState(0);
-
-// 	useEffect(function () {
-// 		// This is the callback that runs inside of the useEffect
-// 		console.log("useEffect has run");
-// 	}, []); // This is the dependency array
-
-// 	return (
-// 		<div>
-// 			<p>Count: {count}</p>
-// 			<p>secondCount: {secondCount}</p>
-// 			<button onClick={() => setCount((count) => count + 1)}>+</button>
-// 			<button onClick={() => setSecondCount((count) => count + 1)}>+</button>
-// 		</div>
-// 	);
-// }
-
-// export default App;
